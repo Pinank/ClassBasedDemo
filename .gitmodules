@@ -1,0 +1,2 @@
+[submodule "blog-example/blog-example"]
+	ignore = dirty
