@@ -2,7 +2,10 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse, Http404
 from django.views.generic.dates import (
     YearArchiveView,
-    MonthArchiveView
+    MonthArchiveView,
+    WeekArchiveView,
+    DayArchiveView,
+    TodayArchiveView
     )
 from django.shortcuts import get_object_or_404
 from django.views.generic import (
@@ -145,15 +148,31 @@ class RedirectViewDemo(RedirectView):
     #     return super(RedirectViewDemo, self).get_redirect_url(*args, **kwargs)
 
 class ArticleYearArchiveView(YearArchiveView):
-    template_name = 'articles/article_archive_year.html'
-    queryset = Article.objects.all()
+    # template_name = 'articles/article_archive_year.html'
+    model = Article
     date_field = "created"
     make_object_list = True
     allow_future = True
 
 class ArticleMonthArchiveView(MonthArchiveView):
-    print("ArticleMonthArchiveView---->")
-    template_name = 'articles/article_archive_month.html'
-    queryset = Article.objects.all()
+    # template_name = 'articles/article_archive_month.html'
+    model = Article
+    date_field = "created"
+    allow_future = True
+
+class ArticleWeekArchiveView(WeekArchiveView):
+    # template_name = 'articles/article_archive_week.html'
+    model = Article
+    date_field = "created"
+    week_format = "%W"
+    allow_future = True
+
+class ArticleDayArchiveView(DayArchiveView):
+    model = Article
+    date_field = "created"
+    allow_future = True
+
+class ArticleTodayArchiveView(TodayArchiveView):
+    model = Article
     date_field = "created"
     allow_future = True

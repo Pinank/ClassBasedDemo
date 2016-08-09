@@ -1,6 +1,6 @@
 <ul>
     {% for date in date_list %}
-        <li>{{ date|date }}</li>
+        <li>{{ date | date }}</li>
     {% endfor %}
 </ul>
 
@@ -8,7 +8,8 @@
     <h1>All Articles for {{ year|date:"Y" }}</h1>
     {% for obj in object_list %}
         <p>
-            {{ obj.title }} - {{ obj.created|date:"F j, Y" }}
+            {{ obj.title }} <br/> 
+            {{ obj.created | date:"F j, Y" }}
         </p>
     {% endfor %}
 </div>

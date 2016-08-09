@@ -7,7 +7,8 @@ from .models import Article
 from .views import BlogHomeListView, ArticleDetailView, ArticleCreateView, \
                    ArticleDeleteView, ArticleUpdateView, MyView, \
                    TemplateViewDemo, RedirectViewDemo, ArticleYearArchiveView, \
-                   ArticleMonthArchiveView
+                   ArticleMonthArchiveView, ArticleWeekArchiveView, ArticleDayArchiveView, \
+                   ArticleTodayArchiveView
 urlpatterns = [
     url(r'^$', BlogHomeListView.as_view(), name="blog-home"),
     url(r'^(?P<pk>\d+)/$', ArticleDetailView.as_view(), name="article-detail"),
@@ -26,6 +27,7 @@ urlpatterns = [
         allow_future=True), 
         name="article_archive"),
     url(r'^yearly/(?P<year>[0-9]{4})/$', ArticleYearArchiveView.as_view(), name="article_year_archive"),
+
     # Example: /2012/aug/
     url(r'^(?P<year>[0-9]{4})/(?P<month>[-\w]+)/$', ArticleMonthArchiveView.as_view(), 
         name="archive_month"),
@@ -33,4 +35,14 @@ urlpatterns = [
     # Example: /2012/08/
     # url(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]+)/$', ArticleMonthArchiveView.as_view(month_format='%m'), 
         # name="archive_month_numeric"),
+
+    # Example: /2012/week/23/
+    url(r'^(?P<year>[0-9]{4})/week/(?P<week>[0-9]+)/$', ArticleWeekArchiveView.as_view(), 
+        name="archive_week"),
+
+    # Example: /2012/nov/10/
+    url(r'^(?P<year>[0-9]{4})/(?P<month>[-\w]+)/(?P<day>[0-9]+)/$', ArticleDayArchiveView.as_view(),
+        name="archive_day"),
+
+    url(r'^today/$', ArticleTodayArchiveView.as_view(), name="archive_today"),
 ]
